@@ -48,7 +48,6 @@ router.post(
       const jwtData = jwt.sign(data, JWT_SECRET);
       res.status(200).json({ token: jwtData });
     } catch (err) {
-      console.log(err.message);
       res.status(500).send("Some error occured");
     }
   }
@@ -100,8 +99,6 @@ router.post("/getUser", fetchUser, async (req, res) => {
     userId = req.user.id;
     const user = await User.findById(userId).select("-password");
     res.send(user);
-  } catch (error) {
-    console.log(error.message);
-  }
+  } catch (error) {}
 });
 module.exports = router;

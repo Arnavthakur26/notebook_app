@@ -6,6 +6,7 @@ import noteContext from "../context/notes/NoteContext";
 import filterContext from "../context/filter/FilterContext";
 import LoginBtn from "../components/LoginBtn";
 import Alert from "./Alert";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const authToken = localStorage.getItem("authToken");
@@ -13,15 +14,25 @@ const Home = () => {
   const { filterTag } = fContext;
   const context = useContext(noteContext);
   const { notes, getNotes } = context;
-  console.log(authToken);
   useEffect(() => {
     getNotes();
   }, []);
   if (authToken === null) {
     return (
-      <div className="text-white font-mono font-extrabold absolute flex first-line:justify-center -translate-x-1/2 top-1/2 left-1/2 text-4xl">
-        <span className="mr-2">Get Started</span>
-        <LoginBtn />
+      <div className="text-white font-mono font-extrabold absolute flex flex-col first-line:justify-center -translate-x-1/2 top-1/2 left-1/2 text-4xl">
+        <div className="flex">
+          <span className="mr-2">Get Started</span>
+          <LoginBtn />
+        </div>
+        <span className="text-xl text-center">
+          New User?{" "}
+          <Link
+            to={"/signup"}
+            className="underline transition hover:text-yellow-300"
+          >
+            Register Now!
+          </Link>
+        </span>
       </div>
     );
   } else {

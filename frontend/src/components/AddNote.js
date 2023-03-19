@@ -33,7 +33,7 @@ const AddNote = ({ showModal, setShowModal, update, id }) => {
 
   const onUpdate = (e) => {
     e.preventDefault();
-    e.setShowModal(false);
+    setShowModal(false);
     editNote(id, note.title, note.description, note.tag);
   };
   const onChange = (e) => {
