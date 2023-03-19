@@ -5,7 +5,7 @@ import NoteContext from "./NoteContext";
 const NoteState = (props) => {
   const notesInitial = [];
   const getNotes = async () => {
-    const response = await fetch("http://127.0.0.1:5000/api/notes/fetchNotes", {
+    const response = await fetch("http://localhost:5000/api/notes/fetchNotes", {
       method: "GET",
       headers: {
         "auth-token": localStorage.getItem("authToken"),
@@ -16,7 +16,7 @@ const NoteState = (props) => {
   };
   const addNote = async (note) => {
     const { title, description, tag } = note;
-    const response = await fetch("http://127.0.0.1:5000/api/notes/addNote", {
+    const response = await fetch("http://localhost:5000/api/notes/addNote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const NoteState = (props) => {
   };
   const deleteNote = async (id) => {
     const response = await fetch(
-      `http://127.0.0.1:5000/api/notes/deleteNote/${id}`,
+      `http://localhost:5000/api/notes/deleteNote/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -46,7 +46,7 @@ const NoteState = (props) => {
   };
   const editNote = async (id, title, description, tag) => {
     const response = await fetch(
-      `http://127.0.0.1:5000/api/notes/updateNote/${id}`,
+      `http://localhost:5000/api/notes/updateNote/${id}`,
       {
         method: "PUT",
         headers: {
