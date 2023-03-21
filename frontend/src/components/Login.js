@@ -7,7 +7,8 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
+    const host = process.env.MONGODB_URI;
+    const response = await fetch(`http://${host}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -11,7 +11,8 @@ const SignUp = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/createUser", {
+    const host = process.env.REACT_APP_MONGODB_URI;
+    const response = await fetch(`http://${host}/api/auth/createUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

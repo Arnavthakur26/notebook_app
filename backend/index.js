@@ -1,8 +1,11 @@
 const connectToMongo = require("./db");
 const express = require("express");
+const dotenv = require("dotenv");
 var cors = require("cors");
+dotenv.config();
+const mongoURI = process.env.MONGO_DB_URI;
 
-connectToMongo();
+connectToMongo(mongoURI);
 
 const app = express();
 const port = 5000;
@@ -23,5 +26,5 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });

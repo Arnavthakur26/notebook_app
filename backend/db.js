@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://127.0.0.1:27017/notebookapp";
 
-const connectToMongo = () => {
-  mongoose.connect(mongoURI);
+const connectToMongo = (mongoURI) => {
+  mongoose.connect(mongoURI).then(() => console.log("Connected to mongodb"));
 };
 
 module.exports = connectToMongo;
