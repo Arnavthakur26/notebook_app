@@ -11,7 +11,7 @@ const SignUp = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const host = process.env.REACT_APP_MONGODB_URI;
+    const host = process.env.REACT_APP_HOST;
     const response = await fetch(`http://${host}/api/auth/createUser`, {
       method: "POST",
       headers: {
