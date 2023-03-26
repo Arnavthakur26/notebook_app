@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import noteContext from "../context/notes/NoteContext";
 import filterContext from "../context/filter/FilterContext";
 import LoginBtn from "../components/LoginBtn";
-import Alert from "./Alert";
+
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -22,6 +22,7 @@ const Home = () => {
       <div className="text-white font-mono font-extrabold absolute flex flex-col first-line:justify-center -translate-x-1/2 top-1/2 left-1/2 text-4xl">
         <div className="flex">
           <span className="mr-2">Get Started</span>
+
           <LoginBtn />
         </div>
         <span className="text-xl text-center">
@@ -44,7 +45,7 @@ const Home = () => {
       );
     }
     return (
-      <div className="ml-72 mr-10 flex flex-wrap">
+      <div className="md:ml-72 md:mr-10 m-2 flex flex-wrap">
         {filterTag === ""
           ? notes.map((item, key) => {
               return (

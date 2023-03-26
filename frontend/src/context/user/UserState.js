@@ -4,7 +4,8 @@ import UserContext from "./UserContext";
 const UserState = (props) => {
   const [user, setUser] = useState({});
   const getUser = async (authToken) => {
-    const response = await fetch("http://localhost:5000/api/auth/getUser", {
+    const host = process.env.REACT_APP_HOST;
+    const response = await fetch(`https://${host}/api/auth/getUser`, {
       method: "POST",
       headers: {
         "auth-token": authToken,

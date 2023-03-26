@@ -2,8 +2,15 @@ import React from "react";
 import { useContext, useState } from "react";
 import noteContext from "../context/notes/NoteContext";
 import AddNote from "../components/AddNote";
+import Alert from "./Alert";
 
 const NoteCard = ({ id, title, description, date, tag }) => {
+  const [alertState, setAlertState] = useState({
+    open: false,
+    msg: "",
+    successState: true,
+    icon: "",
+  });
   const [showModal, setShowModal] = useState(false);
   const context = useContext(noteContext);
   const { deleteNote } = context;
@@ -39,33 +46,48 @@ const NoteCard = ({ id, title, description, date, tag }) => {
           id={id}
         />
       ) : null}
+      <Alert
+        open={alertState.open}
+        msg={alertState.msg}
+        successState={alertState.successState}
+        icon={alertState.icon}
+      />
       <div className="justify-around ">
         <div
-          className={`${bgColor} rounded-xl text-white pl-4 pr-4 min-w-[35rem] min-h-[12rem] pt-6 m-2 `}
+          className={`${bgColor} rounded-xl text-white pl-4 pr-4 md:w-[36rem] md:max-w-[36rem] max-w-[22rem]  min-h-[12rem] pt-6 m-2 `}
         >
           <div className="flex justify-between pr-6 pl-6 mb-4">
-            <span className="font-semibold text-2xl ">{title}</span>
+            <span className="font-semibold md:text-2xl text-xl ">{title}</span>
             <div className="flex align-middle items-center gap-4">
               <span
-                className={`rounded-xl min-w-[7rem] bg-gray-900 font-semibold ${textColor} h-11 text-center pt-2`}
+                className={`rounded-xl min-w-[7rem] md:block hidden bg-gray-900 font-semibold ${textColor} h-11 text-center pt-2`}
               >
                 {tag}
               </span>
               <i
-                className="fa-solid fa-pen-to-square cursor-pointer"
+                className="fa-solid ml-3 fa-pen-to-square cursor-pointer"
                 onClick={(e) => {
+                  window.scrollTo({ top: 0 });
                   setShowModal(!showModal);
                 }}
               ></i>
               <i
                 className="fa-solid fa-trash cursor-pointer"
                 onClick={() => {
-                  deleteNote(id);
+                  setAlertState({
+                    open: true,
+                    msg: "Note Deleted",
+                    successState: true,
+                    icon: "fa-circle-xmark",
+                  });
+                  setTimeout(() => {
+                    deleteNote(id);
+                  }, 1000);
                 }}
               ></i>
             </div>
           </div>
-          <div className="pb-10 pr-6 pl-6">{description}</div>
+          <div className="pb-10 pr-6 text-justify pl-6">{description}</div>
           <div className="flex justify-between pr-8 pl-8 pb-4 font-semibold text-md ">
             <span>
               {(dateObj.getHours() > 12

@@ -1,6 +1,7 @@
 ::-webkit-scrollbar {
   width: 10px;
   background: transparent;
+  scrollbar-gutter: stable both-edges;
 }
 
 ::-webkit-scrollbar-track {

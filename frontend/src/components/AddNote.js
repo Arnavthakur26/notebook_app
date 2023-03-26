@@ -3,10 +3,18 @@ import Chip from "./Chip";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import noteContext from "../context/notes/NoteContext";
+import Alert from "./Alert";
 import NavLinks from "../data/NavLinks";
 
 const AddNote = ({ showModal, setShowModal, update, id }) => {
   const [scale, setscale] = useState("scale-0");
+  const [alertState, setAlertState] = useState({
+    open: false,
+    msg: "",
+    successState: true,
+    icon: "",
+  });
+
   const [selectedChip, setSelectedChip] = useState(0);
   const context = useContext(noteContext);
   const { addNote, editNote } = context;
@@ -26,15 +34,33 @@ const AddNote = ({ showModal, setShowModal, update, id }) => {
   const addNewNote = (e) => {
     e.preventDefault();
     if (validation()) {
-      setShowModal(false);
-      addNote(note);
+      setAlertState({
+        open: true,
+        msg: "Note Added",
+        successState: true,
+        icon: "fa-circle-check",
+      });
+      setTimeout(() => {
+        setShowModal(false);
+        addNote(note);
+      }, 1000);
     }
   };
 
   const onUpdate = (e) => {
     e.preventDefault();
-    setShowModal(false);
-    editNote(id, note.title, note.description, note.tag);
+    if (validation()) {
+      setAlertState({
+        open: true,
+        msg: "Note Updated",
+        successState: true,
+        icon: "fa-circle-check",
+      });
+      setTimeout(() => {
+        setShowModal(false);
+        editNote(id, note.title, note.description, note.tag);
+      }, 1000);
+    }
   };
   const onChange = (e) => {
     setNote({
@@ -53,6 +79,12 @@ const AddNote = ({ showModal, setShowModal, update, id }) => {
   }, []);
   return (
     <>
+      <Alert
+        open={alertState.open}
+        msg={alertState.msg}
+        successState={alertState.successState}
+        icon={alertState.icon}
+      />
       <div
         className="w-full absolute top-0 left-0 z-50 flex h-screen items-center align-middle justify-center"
         style={{ background: "rgba(0 ,0 ,0,0.7)" }}
@@ -60,7 +92,7 @@ const AddNote = ({ showModal, setShowModal, update, id }) => {
         <form
           id="addNoteForm"
           onSubmit={addNewNote}
-          className={`absolute transition duration-500 ${scale} p-8 rounded-xl text-white w-1/2 flex flex-col`}
+          className={`absolute transition duration-500 ${scale} p-8 rounded-xl text-white md:w-1/2 w-[calc(100vw-2rem)] flex flex-col`}
           style={{ background: "rgb(49 47 47)" }}
         >
           <label htmlFor="title">Title</label>
@@ -88,7 +120,7 @@ const AddNote = ({ showModal, setShowModal, update, id }) => {
           <label htmlFor="tag" className="mb-2 mt-2">
             Tag
           </label>
-          <div className="flex gap-4 justify-center mb-6" name="tag">
+          <div className="flex flex-wrap gap-4 justify-center mb-6" name="tag">
             {NavLinks.map((item, index) => {
               return (
                 <Chip

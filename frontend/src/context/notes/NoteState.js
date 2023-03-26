@@ -6,7 +6,7 @@ const NoteState = (props) => {
   const host = process.env.REACT_APP_HOST;
   const notesInitial = [];
   const getNotes = async () => {
-    const response = await fetch(`https://${host}api/notes/fetchNotes`, {
+    const response = await fetch(`https://${host}/api/notes/fetchNotes`, {
       method: "GET",
       headers: {
         "auth-token": localStorage.getItem("authToken"),

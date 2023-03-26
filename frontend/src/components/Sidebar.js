@@ -13,8 +13,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Outlet />
-      <div>
+      <div className="md:block hidden">
         <section
           className={`min-h-[87vh]  border border-white border-opacity-10 ml-4 top-20 fixed  w-60 rounded-lg  ${
             authToken === null ? "invisible" : ""

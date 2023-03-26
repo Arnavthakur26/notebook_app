@@ -17,29 +17,35 @@ const Topbar = () => {
   return (
     <>
       <div
-        className="flex sticky top-0 w-[98vw] rounded-b-md m-auto justify-between pr-16 pt-4 mb-4 pb-2 "
+        className="flex  md:text-lg text-xs sticky top-0 w-[98%] rounded-b-md m-auto justify-between pr-2 md:pr-16 pt-4 mb-4 pb-2 "
         style={{
           background: "rgb(49 47 47)",
           borderBottom: "1px solid rgba(255,255,255,0.1)",
         }}
       >
-        <div className="pl-72 text-white text-lg">
+        <div className="md:pl-72 pl-4 text-white text-lg">
           {authToken === null ? (
-            <span className="text-2xl font-mono font-extrabold">Noting</span>
+            <span className=" md:text-2xl text-xs font-mono font-extrabold">
+              <i class="fa-solid text-white fa-bars"></i>
+              Noting
+            </span>
           ) : (
-            `👋 ${user.name}`
+            <span className=" md:text-2xl text-xs font-mono font-extrabold">
+              <i class="fa-solid text-white mr-2 fa-bars"></i>
+              👋{user.name}
+            </span>
           )}
         </div>
-        <div className="flex gap-32">
+        <div className="flex md:gap-32">
           <div className="">
             <input
               type="search"
               name="search"
               id="search"
               autoComplete="off"
-              className={`w-[40rem] scale-x-0 ${
+              className={`md:w-[40rem] w-[8rem] scale-x-0 ${
                 search ? "scale-x-100" : ""
-              } border p-1 pl-4 text-white transition -mr-7 bg-transparent rounded-full`}
+              } border p-1 pl-4 text-white transition  mr-2 md:-mr-7 bg-transparent rounded-full`}
               onBlur={() => {
                 setSearch(false);
               }}
@@ -55,10 +61,11 @@ const Topbar = () => {
             ></i>
           </div>
           <button
-            className={`bg-teal-700 rounded-lg pl-3 ${
+            className={`bg-teal-700 rounded-lg${
               authToken === null ? "invisible" : ""
-            } pr-3 pt-1 pb-1 mb-2 text-gray-200 hover:bg-teal-800 transition`}
+            }  p-2 ml-2 md:pr-3 md:pt-1 md:pb-1 mb-2 md:text-lg text-xs text-gray-200 hover:bg-teal-800 transition`}
             onClick={() => {
+              window.scrollTo({ top: 0 });
               setShowModal(true);
             }}
           >
